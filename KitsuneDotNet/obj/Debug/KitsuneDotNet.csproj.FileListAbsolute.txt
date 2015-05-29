@@ -1,0 +1,7 @@
+C:\Users\Goofy\Documents\SharpDevelop Projects\KitsuneDotNet\KitsuneDotNet\bin\Debug\KitsuneDotNet.dll
+C:\Users\Goofy\Documents\SharpDevelop Projects\KitsuneDotNet\KitsuneDotNet\bin\Debug\KitsuneDotNet.pdb
+C:\Users\Goofy\Documents\SharpDevelop Projects\KitsuneDotNet\KitsuneDotNet\obj\Debug\KitsuneDotNet.csprojResolveAssemblyReference.cache
+C:\Users\Goofy\Documents\SharpDevelop Projects\KitsuneDotNet\KitsuneDotNet\obj\Debug\KitsuneDotNet.dll
+C:\Users\Goofy\Documents\SharpDevelop Projects\KitsuneDotNet\KitsuneDotNet\obj\Debug\KitsuneDotNet.pdb
+C:\Users\Goofy\Documents\SharpDevelop Projects\KitsuneDotNet\KitsuneDotNet\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Goofy\Documents\SharpDevelop Projects\KitsuneDotNet\KitsuneDotNet\bin\Debug\Newtonsoft.Json.xml
