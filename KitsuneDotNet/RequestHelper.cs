@@ -39,6 +39,9 @@ namespace KitsuneDotNet
 			{
 				url.Replace(placeHolderParameter.Key, Convert.ToString(parameters[placeHolderParameter.Value]));
 			}
+			
+			ReplaceGlobalParameters(url, restInterfaceMetadata.GlobalParameters);
+			
 			string urlString = url.ToString();
 			
 			string json_post_data = JsonConvert.SerializeObject(post_data);
@@ -53,12 +56,29 @@ namespace KitsuneDotNet
 				{
 					requestHeaderValue.Replace(placeHolderParameter.Key, Convert.ToString(parameters[placeHolderParameter.Value]));
 				}
+				
+				ReplaceGlobalParameters(requestHeaderValue, restInterfaceMetadata.GlobalParameters);
+				
 				newRequestHeaders.Add(header.Key, requestHeaderValue.ToString());
 			}
 						
 			RequestMetadata requestMetadata = new RequestMetadata(urlString, httpType, newRequestHeaders, json_post_data);
 			
 			return requestMetadata;
+		}
+		
+		private static void ReplaceGlobalParameters(StringBuilder value, Dictionary<string, string> globalParameters) 
+		{
+			if (globalParameters != null)
+			{
+				foreach(var globalParam in globalParameters)
+				{
+					var globParamPlaceHolder = new StringBuilder("{");
+					globParamPlaceHolder.Append(globalParam.Key);
+					globParamPlaceHolder.Append("}");
+					value.Replace(globParamPlaceHolder.ToString(), globalParam.Value);
+				}
+			}
 		}
 		
 		private static void LinkPlaceHolderWithParameter(String value, RestMethodMetadata restMethodMetadata)

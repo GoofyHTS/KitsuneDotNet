@@ -22,10 +22,12 @@ namespace KitsuneDotNet
 		public string BaseUrl {get; private set;}
 		private readonly Dictionary<string, string> interfaceRequestHeaders = new Dictionary<string, string>();
 		private readonly Dictionary<string, RestMethodMetadata> restMethodMetadata = new Dictionary<string, RestMethodMetadata>();
+		public Dictionary<string, string> GlobalParameters {get; private set;}
 		
-		public RestInterfaceMetadata(Type type, string baseUrl)
+		public RestInterfaceMetadata(Type type, string baseUrl, Dictionary<string, string> globalParameters)
 		{
 			this.BaseUrl = baseUrl;
+			this.GlobalParameters = globalParameters;
 			foreach(object obj in type.GetCustomAttributes(true))
 			{
 				var requestHeader = obj as RequestHeader;
@@ -43,7 +45,7 @@ namespace KitsuneDotNet
 			}
 		}
 		
-		public RestInterfaceMetadata(Type type) : this(type, null)
+		public RestInterfaceMetadata(Type type) : this(type, null, null)
 		{
 			
 		}

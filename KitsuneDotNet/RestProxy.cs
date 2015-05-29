@@ -24,19 +24,18 @@ namespace KitsuneDotNet
 	{
 		private RestInterfaceMetadata restInterfaceMetadata;
 		
-		private RestProxy(Type type, string baseUrl) : base(type)
+		private RestProxy(Type type, string baseUrl, Dictionary<string, string> globalParameters) : base(type)
 		{			
-			this.restInterfaceMetadata = new RestInterfaceMetadata(type, baseUrl);
-		}
-		
-		public static T Create<T>()
-		{
-			return (T)new RestProxy(typeof(T), null).GetTransparentProxy();
+			this.restInterfaceMetadata = new RestInterfaceMetadata(type, baseUrl, globalParameters);
 		}
 		
 		public static T Create<T>(string baseUrl)
 		{
-			return (T)new RestProxy(typeof(T), baseUrl).GetTransparentProxy();
+			return (T)new RestProxy(typeof(T), baseUrl, null).GetTransparentProxy();
+		}
+		public static T Create<T>(string baseUrl, Dictionary<string, string> globalParameters)
+		{
+			return (T)new RestProxy(typeof(T), baseUrl, globalParameters).GetTransparentProxy();
 		}
 		
 		public override IMessage Invoke(IMessage msg)
