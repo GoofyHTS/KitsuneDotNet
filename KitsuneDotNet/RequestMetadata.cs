@@ -21,13 +21,15 @@ namespace KitsuneDotNet
 		public RestMethodMetadata.HttpTypes HttpType {get; private set;}
 		public Dictionary<string, string> RequestHeaders {get; private set;}
 		public string PostData {get; private set;}
+		public string StaticResponse {get; set;}
 		
-		public RequestMetadata(string url, RestMethodMetadata.HttpTypes httpType, Dictionary<string, string> requestHeaders, string postData)
+		public RequestMetadata(string url, RestMethodMetadata.HttpTypes httpType, Dictionary<string, string> requestHeaders, string postData, string staticResponse)
 		{
 			this.Url = url;
 			this.HttpType = httpType;
 			this.RequestHeaders = requestHeaders;
 			this.PostData = postData;
+			this.StaticResponse = staticResponse;
 		}
 	}
 }

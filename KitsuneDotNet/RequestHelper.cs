@@ -26,9 +26,12 @@ namespace KitsuneDotNet
 		{
 			RestMethodMetadata restMethodMetadata = restInterfaceMetadata.GetMethodMetadata(methodName);
 			
+			StringBuilder staticResponse = new StringBuilder(restMethodMetadata.StaticResponse);
+			
 			RestMethodMetadata.HttpTypes httpType = restMethodMetadata.HttpType;
 			
 			LinkPlaceHolderWithParameter(restMethodMetadata.Url, restMethodMetadata);
+			LinkPlaceHolderWithParameter(staticResponse.ToString(), restMethodMetadata);
 			
 			var url = new StringBuilder();
 			if (restInterfaceMetadata.BaseUrl != null)
@@ -38,6 +41,7 @@ namespace KitsuneDotNet
 			foreach(var placeHolderParameter in placeholderParameterIndex)
 			{
 				url.Replace(placeHolderParameter.Key, Convert.ToString(parameters[placeHolderParameter.Value]));
+				staticResponse.Replace(placeHolderParameter.Key, Convert.ToString(parameters[placeHolderParameter.Value]));
 			}
 			
 			ReplaceGlobalParameters(url, restInterfaceMetadata.GlobalParameters);
@@ -62,7 +66,9 @@ namespace KitsuneDotNet
 				newRequestHeaders.Add(header.Key, requestHeaderValue.ToString());
 			}
 						
-			RequestMetadata requestMetadata = new RequestMetadata(urlString, httpType, newRequestHeaders, json_post_data);
+			ReplaceGlobalParameters(staticResponse, restInterfaceMetadata.GlobalParameters);
+						
+			RequestMetadata requestMetadata = new RequestMetadata(urlString, httpType, newRequestHeaders, json_post_data, staticResponse.ToString());
 			
 			return requestMetadata;
 		}

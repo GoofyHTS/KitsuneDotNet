@@ -30,7 +30,8 @@ namespace KitsuneDotNet
 		public HttpTypes HttpType {get; private set;}
 		public string Url {get; private set;}
 		public Dictionary<string, string> RequestHeaders {get; private set;}
-		public Dictionary<string, RestMethodParamMetadata> Parameters {get; set;}		
+		public Dictionary<string, RestMethodParamMetadata> Parameters {get; set;}
+		public string StaticResponse {get; set;}
 		
 		public RestMethodMetadata(MethodInfo methodInfo)
 		{
@@ -66,6 +67,12 @@ namespace KitsuneDotNet
 					if (requestHeadersAttributes != null)
 					{
 						this.RequestHeaders.Add(requestHeadersAttributes.Name, requestHeadersAttributes.Value);
+					}
+					
+					var staticResponseAttribute = attributeObj as StaticResponse;
+					if (staticResponseAttribute != null)
+					{
+						this.StaticResponse = staticResponseAttribute.Value;
 					}
 				}
 				

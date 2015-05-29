@@ -26,6 +26,9 @@ namespace KitsuneDotNet
 		
 		public static string SendRequest(RequestMetadata requestMetadata)
 		{
+			if (requestMetadata.StaticResponse != null && requestMetadata.StaticResponse.Length > 0)
+				return requestMetadata.StaticResponse;
+			
 			WebRequest webRequest = WebRequest.Create(requestMetadata.Url);
 			webRequest.ContentType = "application/json";
 			
